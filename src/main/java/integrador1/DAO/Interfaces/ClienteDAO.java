@@ -1,7 +1,7 @@
-package integrador1.DAO;
+package integrador1.DAO.Interfaces;
 
 import java.util.List;
-import integrador1.model.Cliente;
+import integrador1.Entities.Cliente;
 
 public interface ClienteDAO {
     void insertar(Cliente cliente);

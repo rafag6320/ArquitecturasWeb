@@ -1,6 +1,6 @@
-package integrador1.implementations;
-import integrador1.DAO.ClienteDAO;
-import integrador1.model.Cliente;
+package integrador1.DAO.Implementations;
+import integrador1.DAO.Interfaces.ClienteDAO;
+import integrador1.Entities.Cliente;
 import java.sql.*;
 import java.util.*;
 

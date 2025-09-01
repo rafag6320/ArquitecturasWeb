@@ -1,4 +1,4 @@
-package integrador1.model;
+package integrador1.Entities;
 
 public class FacturaProducto {
     private Factura factura;

@@ -1,6 +1,6 @@
-package integrador1.DAO;
+package integrador1.DAO.Interfaces;
 
-import integrador1.model.Factura;
+import integrador1.Entities.Factura;
 import java.util.List;
 
 public interface FacturaDAO {
