@@ -1,13 +1,12 @@
 package integrador1.Entities;
 
-
 import java.util.List;
 
 public class Factura {
     private int idFactura;
     private Cliente cliente;
-    private  int idCliente;
-    private List<Producto> productos; 
+    private int idCliente;
+    private List<Producto> productos;
 
     public Factura() {}
     public Factura(int idFactura, Cliente cliente, List<Producto> productos) {
