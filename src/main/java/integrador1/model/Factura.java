@@ -6,6 +6,7 @@ import java.util.List;
 public class Factura {
     private int idFactura;
     private Cliente cliente;
+    private  int idCliente;
     private List<Producto> productos; 
 
     public Factura() {}
@@ -13,6 +14,10 @@ public class Factura {
         this.idFactura = idFactura;
         this.cliente = cliente;
         this.productos = productos;
+    }
+    public Factura(int idFactura, int idCliente) {
+        this.idFactura = idFactura;
+        this.idCliente = idCliente;
     }
 
     public int getIdFactura() { return idFactura; }
@@ -24,6 +29,7 @@ public class Factura {
     public List<Producto> getProductos() { return productos; }
     public void setProductos(List<Producto> productos) { this.productos = productos; }
 
+    public int getIdCliente() {return cliente.getIdCliente();}
     @Override
     public String toString() {
         return "Factura [id=" + idFactura + ", cliente=" + cliente + ", productos=" + productos + "]";
