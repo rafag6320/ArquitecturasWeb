@@ -7,10 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="arquitecturas1 (1)" />
+        <module name="arquitecturas1" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="arquitecturas1" target="17" />
+      <module name="arquitecturas1 (1)" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
