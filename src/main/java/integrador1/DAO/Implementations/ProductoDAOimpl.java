@@ -10,7 +10,7 @@ import java.util.List;
     public class ProductoDAOimpl implements ProductoDAO {
         private Connection conn;
 
-        public void ProductoDAOimpl(Connection conn) {
+        public ProductoDAOimpl(Connection conn) {
             this.conn = conn;
         }
 
