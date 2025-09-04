@@ -1,7 +1,7 @@
-package integrador1.implementations;
+package integrador1.DAO.Implementations;
 
-import integrador1.DAO.ProductoDAO;
-import integrador1.model.Producto;
+import integrador1.DAO.Interfaces.*;
+import integrador1.Entities.Producto;
 
 import java.sql.*;
 import java.util.ArrayList;

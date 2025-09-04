@@ -21,13 +21,13 @@ public class MySQLJDBCFactory extends DAOFactory {
         this.conexion = getConexion();
     }
 
-    private Connection getConexion(){
+    private Connection getConexion() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-
             return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
+            return null; // Se retorna null para evitar problemas de compilacion
         }
     }
 
