@@ -2,6 +2,8 @@ package integrador1.DAO.Factory;
 
 import integrador1.DAO.Implementations.ClienteDAOimpl;
 import integrador1.DAO.Implementations.FacturaDAOimpl;
+import integrador1.DAO.Implementations.FacturaProductoDAOimpl;
+import integrador1.DAO.Implementations.ProductoDAOimpl;
 import integrador1.DAO.Interfaces.ClienteDAO;
 import integrador1.DAO.Interfaces.FacturaDAO;
 import integrador1.DAO.Interfaces.FacturaProductoDAO;
@@ -35,12 +37,10 @@ public class MySQLJDBCFactory extends DAOFactory {
         return new FacturaDAOimpl(conexion);
     }
     public FacturaProductoDAO getFacturaProductoDAO() {
-        // Return de FacturaProductoDAOimpl
-        return null;
+        return new FacturaProductoDAOimpl(conexion);
     }
     public ProductoDAO getProductoDAO() {
-        // Return de ProductoDAOimpl
-        return null;
+        return new ProductoDAOimpl(conexion);
     }
     public ClienteDAO getClienteDAO() {
         return new ClienteDAOimpl(conexion);
