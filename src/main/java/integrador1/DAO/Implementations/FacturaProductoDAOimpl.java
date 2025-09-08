@@ -16,7 +16,7 @@ public class FacturaProductoDAOimpl implements FacturaProductoDAO {
         inicializarTabla();
     }
 
-    // Esta función no la expone FacturaDAO ya que se ejecuta cada vez creada la clase.
+
     private void inicializarTabla() {
         String sql = "CREATE TABLE IF NOT EXISTS FacturaProducto (" +
                 "idFactura INT, " +

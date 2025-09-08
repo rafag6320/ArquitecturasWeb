@@ -15,7 +15,7 @@ public class FacturaDAOimpl implements FacturaDAO {
         inicializarTabla();
     }
 
-    // Esta función no la expone FacturaDAO ya que se ejecuta cada vez creada la clase.
+
     private void inicializarTabla() {
         String sql = "CREATE TABLE IF NOT EXISTS Factura (" +
                 "idFactura INT PRIMARY KEY, " +
@@ -57,7 +57,7 @@ public class FacturaDAOimpl implements FacturaDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null; // si no encontró nada
+        return null;
     }
 
     @Override
