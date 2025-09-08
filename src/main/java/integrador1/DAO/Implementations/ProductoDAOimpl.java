@@ -12,6 +12,21 @@ import java.util.List;
 
         public ProductoDAOimpl(Connection conn) {
             this.conn = conn;
+            inicializarTabla();
+        }
+
+        // Esta función no la expone ProductoDAO ya que se ejecuta cada vez creada la clase.
+        private void inicializarTabla() {
+            String sql = "CREATE TABLE IF NOT EXISTS Producto (" +
+                    "idProducto INT PRIMARY KEY, " +
+                    "nombre VARCHAR(100) NOT NULL, " +
+                    "valor FLOAT NOT NULL" +
+                    ")";
+            try (Statement stmt = conn.createStatement()) {
+                stmt.executeUpdate(sql);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         @Override

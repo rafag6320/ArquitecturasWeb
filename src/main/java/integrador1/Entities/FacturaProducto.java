@@ -1,30 +1,40 @@
 package integrador1.Entities;
 
 public class FacturaProducto {
-    private Factura factura;
-    private Producto producto;
+    private int idFactura;
+    private int idProducto;
     private int cantidad;
 
-    public FacturaProducto() {}
-    public FacturaProducto(Factura factura, Producto producto, int cantidad) {
-        this.factura = factura;
-        this.producto = producto;
+    public FacturaProducto() {
+    }
+
+    public FacturaProducto(int factura, int producto, int cantidad) {
+        this.idFactura = factura;
+        this.idProducto = producto;
         this.cantidad = cantidad;
     }
 
-    public Factura getFactura() { return factura; }
-    public void setFactura(Factura factura) { this.factura = factura; }
+    public int getIdFactura() {
+        return idFactura;
+    }
 
-    public Producto getProducto() { return producto; }
-    public void setProducto(Producto producto) { this.producto = producto; }
+    public void setIdFactura(int idFactura) {
+        this.idFactura = idFactura;
+    }
 
-    public int getCantidad() { return cantidad; }
-    public void setCantidad(int cantidad) { this.cantidad = cantidad; }
+    public int getIdProducto() {
+        return idProducto;
+    }
 
-    @Override
-    public String toString() {
-        return "FacturaProducto [factura=" + factura.getIdFactura() +
-                ", producto=" + producto.getIdProducto() +
-                ", cantidad=" + cantidad + "]";
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
     }
 }

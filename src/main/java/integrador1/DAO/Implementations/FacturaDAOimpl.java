@@ -12,6 +12,21 @@ public class FacturaDAOimpl implements FacturaDAO {
 
     public FacturaDAOimpl(Connection conn) {
         this.conn = conn;
+        inicializarTabla();
+    }
+
+    // Esta función no la expone FacturaDAO ya que se ejecuta cada vez creada la clase.
+    private void inicializarTabla() {
+        String sql = "CREATE TABLE IF NOT EXISTS Factura (" +
+                "idFactura INT PRIMARY KEY, " +
+                "idCliente INT, " +
+                "CONSTRAINT fk_factura_cliente FOREIGN KEY (idCliente) REFERENCES Cliente(idCliente)" +
+                ")";
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void insertar(Factura factura) {

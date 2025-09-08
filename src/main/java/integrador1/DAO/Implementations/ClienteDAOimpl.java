@@ -9,6 +9,20 @@ public class ClienteDAOimpl implements ClienteDAO {
 
     public ClienteDAOimpl(Connection conn) {
         this.conn = conn;
+        inicializarTabla();
+    }
+
+    // Esta función no la expone ClienteDAO ya que se ejecuta cada vez creada la clase.
+    private void inicializarTabla() {
+        String sql = "CREATE TABLE IF NOT EXISTS Cliente (" +
+                "idCliente INT PRIMARY KEY, " +
+                "nombre VARCHAR(100) NOT NULL, " +
+                "email VARCHAR(100) NOT NULL)";
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
