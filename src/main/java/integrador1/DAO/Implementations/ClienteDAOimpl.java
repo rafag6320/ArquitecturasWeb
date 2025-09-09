@@ -1,6 +1,8 @@
 package integrador1.DAO.Implementations;
 import integrador1.DAO.Interfaces.ClienteDAO;
 import integrador1.Entities.Cliente;
+import integrador1.Entities.ClienteTotalFacturado;
+
 import java.sql.*;
 import java.util.*;
 
@@ -91,4 +93,41 @@ public class ClienteDAOimpl implements ClienteDAO {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public List<ClienteTotalFacturado> obtenerClientesPorFacturacion() {
+        List<ClienteTotalFacturado> lista = new ArrayList<>();
+
+        String sql = "SELECT " +
+                "    c.idCliente, " +
+                "    c.nombre, " +
+                "    SUM(fp.cantidad * p.valor) AS totalFacturado " +
+                "FROM Cliente c " +
+                "JOIN Factura f ON c.idCliente = f.idCliente " +
+                "JOIN FacturaProducto fp ON f.idFactura = fp.idFactura " +
+                "JOIN Producto p ON fp.idProducto = p.idProducto " +
+                "GROUP BY c.idCliente, c.nombre " +
+                "ORDER BY totalFacturado DESC;";
+
+        try (Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
+            while (rs.next()) {
+                lista.add(new ClienteTotalFacturado(
+                        rs.getInt("idCliente"),
+                        rs.getString("nombre"),
+                        rs.getDouble("totalFacturado")
+                ));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+
+
+
 }

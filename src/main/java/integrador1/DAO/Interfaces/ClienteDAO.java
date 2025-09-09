@@ -2,6 +2,7 @@ package integrador1.DAO.Interfaces;
 
 import java.util.List;
 import integrador1.Entities.Cliente;
+import integrador1.Entities.ClienteTotalFacturado;
 
 public interface ClienteDAO {
     void insertar(Cliente cliente);
@@ -9,4 +10,6 @@ public interface ClienteDAO {
     List<Cliente> obtenerTodos();
     void actualizar(Cliente cliente);
     void eliminar(int id);
+
+    List<ClienteTotalFacturado> obtenerClientesPorFacturacion();
 }

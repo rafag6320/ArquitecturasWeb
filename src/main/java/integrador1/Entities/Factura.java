@@ -28,7 +28,7 @@ public class Factura {
     public List<Producto> getProductos() { return productos; }
     public void setProductos(List<Producto> productos) { this.productos = productos; }
 
-    public int getIdCliente() {return cliente.getIdCliente();}
+    public int getIdCliente() {return idCliente;}
     @Override
     public String toString() {
         return "Factura [id=" + idFactura + ", cliente=" + cliente + ", productos=" + productos + "]";

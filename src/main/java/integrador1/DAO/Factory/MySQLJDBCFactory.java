@@ -15,9 +15,10 @@ import java.sql.SQLException;
 
 public class MySQLJDBCFactory extends DAOFactory {
     private Connection conexion;
-    private static final String URL = "jdbc:mysql://localhost:3306/sistema?useSSL=false&serverTimezone=UTC";
+    private static final String URL = "jdbc:mysql://localhost:3306/sistema?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     private static final String USER = "root";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "root123";
+
 
     public MySQLJDBCFactory () {
         this.conexion = getConexion();
