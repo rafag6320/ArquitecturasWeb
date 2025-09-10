@@ -24,15 +24,12 @@ public class Main {
         FacturaProductoDAO operaciones_facturaproducto = daoFactory.getFacturaProductoDAO();
 
 
-
-
         // Correr 1 vez, o dara error de duplicadas.
-        /*List<Cliente> registros_de_prueba = LeerClientes.obtenerRegistros();
-
-        for(Cliente cliente : registros_de_prueba){
+        List<Cliente> registros_de_cliente = LeerClientes.obtenerRegistros();
+        // Cargar clientes
+        for(Cliente cliente : registros_de_cliente){
             operaciones_cliente.insertar(cliente);
         }
-
 
         List<Producto> registros_de_producto = LeerProductos.obtenerRegistros();
         // Cargar productos
@@ -51,11 +48,17 @@ public class Main {
         for (FacturaProducto fp : registro_de_facturaproducto) {
             operaciones_facturaproducto.insertar(fp);
         }
-        */
+
         System.out.println("=== Clientes ordenados por total facturado ===");
-        List<ClienteTotalFacturado> ranking = operaciones_cliente.obtenerClientesPorFacturacion();
-        for (ClienteTotalFacturado cf : ranking) {
+        List<ClienteTotalFacturado> ranking_clientes = operaciones_cliente.obtenerClientesPorFacturacion();
+        for (ClienteTotalFacturado cf : ranking_clientes) {
             System.out.println(cf);
+        }
+
+        System.out.println("=== Producto con mayor recaudación ===");
+        List<ProductoTotalRecaudado> ranking_productos = operaciones_producto.obtenerProductosMasRecaudados();
+        for (ProductoTotalRecaudado pr : ranking_productos) {
+            System.out.println(pr);
         }
     }
 }

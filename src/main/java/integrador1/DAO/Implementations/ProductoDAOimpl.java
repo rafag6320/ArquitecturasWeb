@@ -2,6 +2,7 @@ package integrador1.DAO.Implementations;
 
 import integrador1.DAO.Interfaces.*;
 import integrador1.Entities.Producto;
+import integrador1.Entities.ProductoTotalRecaudado;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -110,29 +111,32 @@ import java.util.List;
                 e.printStackTrace();
             }
         }
-        // por ahora retorno Object
-        public Object ProductoMasRecaudo (Producto producto) {
-           String sql = "SELECT p.idProducto, p.nombre, SUM(fp.cantidad * p.valor) AS recaudacion " +
+
+        @Override
+        public List<ProductoTotalRecaudado> obtenerProductosMasRecaudados () {
+            List<ProductoTotalRecaudado> lista = new ArrayList<>();
+           String sql = "SELECT p.idProducto, p.nombre, SUM(fp.cantidad * p.valor) AS total, SUM(fp.cantidad) as cantidad " +
                    "FROM Producto p " +
                    "JOIN FacturaProducto fp ON p.idProducto = fp.idProducto " +
                    "GROUP BY p.idProducto, p.nombre " +
-                   "ORDER BY recaudacion DESC LIMIT 1;";
+                   "ORDER BY total DESC LIMIT 1;";
 
             try (PreparedStatement ps = conn.prepareStatement(sql)) {
                 ResultSet rs = ps.executeQuery();
 
-                if (rs.next()) {    // aca podriamos crear una clase productoRecaudacion para no tenga que ser temporal el atributo recaudacion
-                    Producto Producto  = new Producto( // seria new ProductoValor (y hacer la clase) pero como quieran
+                if (rs.next()) {
+                    lista.add(new ProductoTotalRecaudado(
                             rs.getInt("idProducto"),
                             rs.getString("nombre"),
-                            rs.getFloat("recaudacion")
-                    );
+                            rs.getFloat("total"),
+                            rs.getFloat("cantidad")
+                    ));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
 
-            return null;
+            return lista;
         }
 
     }
