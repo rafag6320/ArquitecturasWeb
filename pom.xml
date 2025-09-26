@@ -21,6 +21,16 @@
             <version>8.0.33</version> <!-- usa la última versión estable -->
         </dependency>
         <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>9.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>7.1.0.Final</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-csv</artifactId>
             <version>1.10.0</version>
