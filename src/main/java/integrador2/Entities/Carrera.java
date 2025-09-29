@@ -1,7 +1,14 @@
 package integrador2.Entities;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="Carrera")
 public class Carrera {
-    private int id_carrera, duracion;
+    @Id
+    @Column(name="id_carrera")
+    private int id_carrera;
+    private int duracion;
     private String carrera;
 
     public Carrera () {}

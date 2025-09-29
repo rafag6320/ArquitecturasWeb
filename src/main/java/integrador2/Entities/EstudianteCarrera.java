@@ -1,7 +1,21 @@
 package integrador2.Entities;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="EstudianteCarrera")
 public class EstudianteCarrera {
-    private int id, inscripcion, graduado, antiguedad, id_carrera, id_estudiante;
+    @Id
+    @Column(name="id")
+    private int id;
+    private int inscripcion, graduado, antiguedad;
+
+    @ManyToOne
+    @JoinColumn(name="id_estudiante", referencedColumnName = "DNI")
+    private Estudiante estudiante;
+    @ManyToOne
+    @JoinColumn(name="id_carrera")
+    private Carrera carrera;
 
     public EstudianteCarrera() {}
     public EstudianteCarrera(int id, int inscripcion, int graduado,  int antiguedad, int id_carrera, int id_estudiante) {
@@ -9,7 +23,6 @@ public class EstudianteCarrera {
         this.inscripcion = inscripcion;
         this.graduado = graduado;
         this.antiguedad = antiguedad;
-        this.id_carrera = id_carrera;
     }
 
     public int getId() {
@@ -44,19 +57,21 @@ public class EstudianteCarrera {
         this.antiguedad = antiguedad;
     }
 
-    public int getId_carrera() {
-        return id_carrera;
+
+    public Estudiante getEstudiante() {
+        return estudiante;
     }
 
-    public void setId_carrera(int id_carrera) {
-        this.id_carrera = id_carrera;
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
     }
 
-    public int getId_estudiante() {
-        return id_estudiante;
+    public Carrera getCarrera() {
+        return carrera;
     }
 
-    public void setId_estudiante(int id_estudiante) {
-        this.id_estudiante = id_estudiante;
+    public void setCarrera(Carrera carrera) {
+        this.carrera = carrera;
     }
+
 }
