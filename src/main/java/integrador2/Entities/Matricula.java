@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name="EstudianteCarrera")
-public class EstudianteCarrera {
+public class Matricula {
     @Id
     @Column(name="id")
     private int id;
@@ -17,8 +17,8 @@ public class EstudianteCarrera {
     @JoinColumn(name="id_carrera")
     private Carrera carrera;
 
-    public EstudianteCarrera() {}
-    public EstudianteCarrera(int id, int inscripcion, int graduado,  int antiguedad, int id_carrera, int id_estudiante) {
+    public Matricula() {}
+    public Matricula(int id, int inscripcion, int graduado, int antiguedad, int id_carrera, int id_estudiante) {
         this.id = id;
         this.inscripcion = inscripcion;
         this.graduado = graduado;

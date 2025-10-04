@@ -1,11 +1,11 @@
 package integrador2.DTO;
 
-public class EstadisticaInscriptos {
+public class EstadisticaCarreraDTO {
     private int id_carrera;
     private String carrera;
     private int inscriptos;
 
-    public EstadisticaInscriptos(int id_carrera, String carrera, int inscriptos) {
+    public EstadisticaCarreraDTO(int id_carrera, String carrera, int inscriptos) {
         this.id_carrera = id_carrera;
         this.carrera = carrera;
         this.inscriptos = inscriptos;

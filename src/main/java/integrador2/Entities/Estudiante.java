@@ -10,17 +10,18 @@ public class Estudiante {
     private int DNI;
     private int LU;
     private int edad;
-    private String nombre,apellido,genero;
+    private String nombre,apellido,genero,ciudad;
 
     public Estudiante() {}
 
-    public Estudiante(int DNI, int LU, int edad, String nombre, String apellido, String genero) {
+    public Estudiante(int DNI, int LU, int edad, String nombre, String apellido, String genero, String ciudad) {
         this.DNI = DNI;
         this.LU = LU;
         this.edad = edad;
         this.nombre = nombre;
         this.apellido = apellido;
         this.genero = genero;
+        this.ciudad = ciudad;
     }
 
     public int getDNI() {
@@ -69,5 +70,13 @@ public class Estudiante {
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
     }
 }

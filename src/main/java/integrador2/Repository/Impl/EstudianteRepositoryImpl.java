@@ -1,5 +1,7 @@
 package integrador2.Repository.Impl;
 
+import integrador2.DTO.EstadisticaCarreraDTO;
+import integrador2.Entities.Carrera;
 import integrador2.Entities.Estudiante;
 import integrador2.Repository.Interfaces.EstudianteRepository;
 import jakarta.persistence.EntityManager;
@@ -38,6 +40,17 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 
         List<Estudiante> students = query.getResultList();
         return students;
+    }
+
+    @Override
+    public List<Estudiante> findByCarrera(Carrera carrera, String ciudad) {
+        String jpql = "SELECT e.nombre, e.apellido, e.ciudad, c.carrera " +
+                "FROM Matricula ec " +
+                "JOIN ec.estudiante e " +
+                "JOIN ec.carrera c " +
+                "WHERE c.carrera = :carrera AND e.ciudad = :ciudad";
+
+        return em.createQuery(jpql, Estudiante.class).setParameter("carrera", carrera.getCarrera()).setParameter("ciudad", ciudad).getResultList();
     }
 
     @Override
