@@ -9,9 +9,17 @@ import java.util.List;
 
 public class CarreraRepositoryImpl implements CarreraRepository {
     private EntityManager em;
+    private static CarreraRepositoryImpl instance;
 
     public CarreraRepositoryImpl(EntityManager em) {
         this.em = em;
+    }
+
+    public static CarreraRepositoryImpl getInstance(EntityManager em) {
+        if(instance == null){
+            instance = new CarreraRepositoryImpl(em);
+        }
+        return instance;
     }
 
     public List<EstadisticaCarreraDTO> getEstadisticaInscriptos() {

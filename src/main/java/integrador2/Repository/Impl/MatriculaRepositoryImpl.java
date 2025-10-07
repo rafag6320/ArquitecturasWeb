@@ -10,9 +10,17 @@ import java.time.LocalDate;
 
 public class MatriculaRepositoryImpl implements MatriculaRepository {
     private EntityManager em;
+    private static MatriculaRepositoryImpl instance;
 
     public MatriculaRepositoryImpl(EntityManager em) {
         this.em = em;
+    }
+
+    public static MatriculaRepositoryImpl getInstance(EntityManager em) {
+        if(instance == null){
+            instance = new MatriculaRepositoryImpl(em);
+        }
+        return instance;
     }
 
     @Override

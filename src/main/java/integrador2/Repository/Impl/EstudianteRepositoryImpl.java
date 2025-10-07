@@ -1,6 +1,5 @@
 package integrador2.Repository.Impl;
 
-import integrador2.DTO.EstadisticaCarreraDTO;
 import integrador2.Entities.Carrera;
 import integrador2.Entities.Estudiante;
 import integrador2.Repository.Interfaces.EstudianteRepository;
@@ -11,9 +10,17 @@ import java.util.List;
 
 public class EstudianteRepositoryImpl implements EstudianteRepository {
     private EntityManager em;
+    private static EstudianteRepositoryImpl instance;
 
     public EstudianteRepositoryImpl(EntityManager em) {
         this.em = em;
+    }
+
+    public static EstudianteRepositoryImpl getInstance(EntityManager em) {
+        if(instance == null){
+            instance = new EstudianteRepositoryImpl(em);
+        }
+        return instance;
     }
 
     @Override
