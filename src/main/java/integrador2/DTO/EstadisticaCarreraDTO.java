@@ -4,11 +4,16 @@ public class EstadisticaCarreraDTO {
     private int id_carrera;
     private String carrera;
     private int inscriptos;
+    private int anio;
+    private int egresados;
 
-    public EstadisticaCarreraDTO(int id_carrera, String carrera, int inscriptos) {
+
+    public EstadisticaCarreraDTO(int id_carrera, String carrera, int inscriptos, int anio, int egresados  ) {
         this.id_carrera = id_carrera;
         this.carrera = carrera;
         this.inscriptos = inscriptos;
+        this.anio = anio;
+        this.egresados = egresados;
     }
 
     public int getId_carrera() {
