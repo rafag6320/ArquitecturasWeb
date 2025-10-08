@@ -58,7 +58,6 @@ public class Matricula {
         this.antiguedad = antiguedad;
     }
 
-
     public Estudiante getEstudiante() {
         return estudiante;
     }
@@ -74,5 +73,4 @@ public class Matricula {
     public void setCarrera(Carrera carrera) {
         this.carrera = carrera;
     }
-
 }

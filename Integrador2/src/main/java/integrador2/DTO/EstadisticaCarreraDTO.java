@@ -4,9 +4,9 @@ package integrador2.DTO;
 public class EstadisticaCarreraDTO {
     private int id_carrera;
     private String carrera;
-    private int inscriptos;
+    private Long inscriptos;
 
-    public EstadisticaCarreraDTO(int id_carrera, String carrera, int inscriptos) {
+    public EstadisticaCarreraDTO(int id_carrera, String carrera, Long inscriptos) {
         this.id_carrera = id_carrera;
         this.carrera = carrera;
         this.inscriptos = inscriptos;
@@ -28,11 +28,15 @@ public class EstadisticaCarreraDTO {
         this.carrera = carrera;
     }
 
-    public int getInscriptos() {
+    public Long getInscriptos() {
         return inscriptos;
     }
 
-    public void setInscriptos(int inscriptos) {
+    public void setInscriptos(Long inscriptos) {
         this.inscriptos = inscriptos;
+    }
+
+    public String toString(){
+        return "{ carrera: " + getCarrera() + ", inscriptos: " + getInscriptos() + " }";
     }
 }

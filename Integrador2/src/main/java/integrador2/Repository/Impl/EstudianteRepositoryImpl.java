@@ -1,5 +1,6 @@
 package integrador2.Repository.Impl;
 
+import integrador2.DTO.EstudianteCarreraDTO;
 import integrador2.Entities.Carrera;
 import integrador2.Entities.Estudiante;
 import integrador2.Repository.Interfaces.EstudianteRepository;
@@ -66,16 +67,16 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
     }
 
     @Override
-    public List<Estudiante> findByCarrera(Carrera carrera, String ciudad) {
+    public List<EstudianteCarreraDTO> findByCarrera(Carrera carrera, String ciudad) {
         EntityManager em = emf.createEntityManager();
         try {
-            String jpql = "SELECT e.nombre, e.apellido, e.ciudad, c.carrera " +
+            String jpql = "SELECT new integrador2.DTO.EstudianteCarreraDTO(e.nombre, e.apellido, e.ciudad, c.carrera, e.edad, e.LU) " +
                     "FROM Matricula ec " +
                     "JOIN ec.estudiante e " +
                     "JOIN ec.carrera c " +
                     "WHERE c.carrera = :carrera AND e.ciudad = :ciudad";
 
-            return em.createQuery(jpql, Estudiante.class).setParameter("carrera", carrera.getCarrera()).setParameter("ciudad", ciudad).getResultList();
+            return em.createQuery(jpql, EstudianteCarreraDTO.class).setParameter("carrera", carrera.getCarrera()).setParameter("ciudad", ciudad).getResultList();
         } finally {
             em.close();
         }
@@ -103,11 +104,11 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
     }
 
     @Override
-    public List<Estudiante> findAll() {
+    public List<Estudiante> findAllOrderedByAge() {
         EntityManager em = emf.createEntityManager();
         try {
             TypedQuery<Estudiante> query = em.createQuery(
-                    "SELECT e FROM Estudiante e", Estudiante.class);
+                    "SELECT e FROM Estudiante e ORDER BY e.edad DESC", Estudiante.class);
 
             List<Estudiante> students = query.getResultList();
             return students;

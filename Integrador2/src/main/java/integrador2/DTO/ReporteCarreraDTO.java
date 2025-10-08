@@ -45,4 +45,8 @@ public class ReporteCarreraDTO {
     public void setAnio(int anio) {
         this.anio = anio;
     }
+
+    public String toString(){
+        return "{ carrera: " + getCarrera() + ", año: " + getAnio() + ", inscriptos: " + getInscriptos() + ", graduados: " + getGraduados() + " }";
+    }
 }

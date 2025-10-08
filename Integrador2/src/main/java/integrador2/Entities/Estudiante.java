@@ -79,4 +79,8 @@ public class Estudiante {
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
+
+    public String toString () {
+        return "{ nombre: "+ getNombre() + ", apellido: "+getApellido() + ", LU: "+ getLU() + ", edad: " + getEdad() + ", ciudad: " + getCiudad() + ", genero: " + getGenero() + " }";
+    }
 }
