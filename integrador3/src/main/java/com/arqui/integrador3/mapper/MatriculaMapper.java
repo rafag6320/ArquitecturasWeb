@@ -2,20 +2,22 @@ package com.arqui.integrador3.mapper;
 
 import com.arqui.integrador3.dto.request.MatriculaRequestDTO;
 import com.arqui.integrador3.dto.response.MatriculaResponseDTO;
+import com.arqui.integrador3.entity.Carrera;
 import com.arqui.integrador3.entity.Estudiante;
 import com.arqui.integrador3.entity.Matricula;
+import com.arqui.integrador3.entity.MatriculaSerializable;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MatriculaMapper {
-    public static Matricula convertFromDTO(MatriculaRequestDTO dto){
+    public static Matricula convertFromDTO(MatriculaRequestDTO dto, Estudiante estudiante, Carrera carrera){
         return new Matricula(
-                dto.getId(),
+                new MatriculaSerializable(estudiante.getDNI(), carrera.getId_carrera()),
                 dto.getInscripcion(),
                 dto.getGraduado(),
                 dto.getAntiguedad(),
-                dto.getId_carrera(),
-                dto.getId_estudiante()
+                estudiante,
+                carrera
         );
     }
 

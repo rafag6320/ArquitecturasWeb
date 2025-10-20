@@ -40,8 +40,7 @@ public class EstudianteService {
     }
 
     public List<EstudianteResponseDTO> findAll() {
-        Sort sort = Sort.by(Sort.Direction.DESC, "edad");
-        return estudianteRepository.findAllOrderedByAge(sort).stream().map(estudianteMapper::convertFromEntity).toList();
+        return estudianteRepository.findAllByOrderByEdadAsc().stream().map(estudianteMapper::convertFromEntity).toList();
     }
 
     public List<EstudianteResponseDTO> findByCareerAndCity(String career, String city) {
@@ -50,7 +49,10 @@ public class EstudianteService {
     }
 
     public List<EstudianteResponseDTO> findByGender(String gender) {
-        List<Estudiante> rawList = estudianteRepository.findByGender(gender);
+        if(!gender.equals("Male") && !gender.equals("Female")) {
+            throw  new IllegalArgumentException("El valor del parametro genero debe ser Male o Female");
+        }
+        List<Estudiante> rawList = estudianteRepository.findByGenero(gender);
         return rawList.stream().map(estudianteMapper::convertFromEntity).toList();
     }
 

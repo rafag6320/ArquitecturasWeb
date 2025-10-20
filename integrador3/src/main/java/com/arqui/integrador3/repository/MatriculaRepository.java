@@ -20,4 +20,19 @@ public interface MatriculaRepository extends JpaRepository<Matricula, Integer> {
             "GROUP BY m.carrera.id_carrera, m.carrera.carrera " +
             "ORDER BY COUNT(m) DESC")
     List<EstadisticaCarreraDTO> findCarrerasConCantidadDeInscriptos();
+    @Query(
+            value = "SELECT c.carrera AS carrera, a.anio, " +
+                    "SUM(CASE WHEN a.tipo = 'I' THEN 1 ELSE 0 END) AS inscriptos, " +
+                    "SUM(CASE WHEN a.tipo = 'G' THEN 1 ELSE 0 END) AS egresados " +
+                    "FROM (" +
+                    "   SELECT m1.id_carrera AS id_carrera, m1.inscripcion AS anio, 'I' AS tipo FROM matricula m1 " +
+                    "   UNION ALL " +
+                    "   SELECT m2.id_carrera AS id_carrera, m2.graduado AS anio, 'G' AS tipo FROM matricula m2 WHERE m2.graduado IS NOT NULL" +
+                    ") a " +
+                    "JOIN carrera c ON c.id_carrera = a.id_carrera " +
+                    "GROUP BY c.carrera, a.anio " +
+                    "ORDER BY c.carrera ASC, a.anio ASC",
+            nativeQuery = true
+    )
+    List<Object[]> generateCareerReport();
 }

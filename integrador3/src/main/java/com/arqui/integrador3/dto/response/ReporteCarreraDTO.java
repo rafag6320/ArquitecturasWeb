@@ -14,6 +14,8 @@ public class ReporteCarreraDTO {
         this.graduados = graduados;
     }
 
+    public ReporteCarreraDTO() {}
+
     public String getCarrera() {
         return carrera;
     }

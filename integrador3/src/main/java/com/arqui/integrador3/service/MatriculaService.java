@@ -2,8 +2,10 @@ package com.arqui.integrador3.service;
 
 import com.arqui.integrador3.dto.request.MatriculaRequestDTO;
 import com.arqui.integrador3.dto.response.MatriculaResponseDTO;
+import com.arqui.integrador3.entity.Carrera;
 import com.arqui.integrador3.entity.Estudiante;
 import com.arqui.integrador3.entity.Matricula;
+import com.arqui.integrador3.entity.MatriculaSerializable;
 import com.arqui.integrador3.mapper.MatriculaMapper;
 import com.arqui.integrador3.repository.CarreraRepository;
 import com.arqui.integrador3.repository.EstudianteRepository;
@@ -26,14 +28,21 @@ public class MatriculaService {
         this.carreraRepository = carreraRepository;
     }
 
-    public MatriculaResponseDTO save (MatriculaRequestDTO matricula) {
-        estudianteRepository.findById(matricula.getId_estudiante()).orElseThrow(() -> new IllegalArgumentException("No existe estudiante registrado con este DNI"));
-        carreraRepository.findById(matricula.getId_carrera()).orElseThrow(() -> new IllegalArgumentException("No existe carrera registrada con este ID"));
+    public MatriculaResponseDTO save (MatriculaRequestDTO req) {
+        Estudiante estudiante = estudianteRepository.findById(req.getId_estudiante()).orElseThrow(() -> new IllegalArgumentException("No existe estudiante registrado con este DNI"));
+        Carrera carrera = carreraRepository.findById(req.getId_carrera()).orElseThrow(() -> new IllegalArgumentException("No existe carrera registrada con este ID"));
 
-        Matricula m = new Matricula(matricula.getId(), matricula.getInscripcion(), matricula.getGraduado(), matricula.getAntiguedad(), matricula.getId_carrera(), matricula.getId_estudiante());
+        MatriculaSerializable serializable = new MatriculaSerializable(req.getId_estudiante(),req.getId_carrera());
 
-        matriculaRepository.save(m);
-        return matriculaMapper.convertFromEntity(m);
+        if(matriculaRepository.existsById(serializable.hashCode())){
+            throw new IllegalStateException("La matricula ya existe para el estudiante " +
+                    req.getId_estudiante() + " en la carrera " + req.getId_carrera());
+        }
+
+        Matricula m = matriculaMapper.convertFromDTO(req, estudiante, carrera);
+
+        Matricula insert = matriculaRepository.save(m);
+        return matriculaMapper.convertFromEntity(insert);
     }
 
     public MatriculaResponseDTO findById(Integer id) {

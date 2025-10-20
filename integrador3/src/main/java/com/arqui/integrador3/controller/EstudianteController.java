@@ -40,7 +40,7 @@ public class EstudianteController {
     // Ej 2 (d) - Recuperar un estudiante, en base a su número de libreta universitaria.
     @GetMapping("/lu/{lu}")
     public ResponseEntity<EstudianteResponseDTO> findByLU(@PathVariable Integer lu){
-        EstudianteResponseDTO row =  estudianteService.findByDni(lu);
+        EstudianteResponseDTO row =  estudianteService.findByLU(lu);
         return ResponseEntity.ok().body(row);
     }
 
@@ -53,7 +53,7 @@ public class EstudianteController {
     }
 
     // Ej 2 (g) - Recuperar todos los estudiantes filtrados por ciudad de residencia y carrera
-    @GetMapping("/{carrer}/{city}")
+    @GetMapping("/{career}/{city}")
     public ResponseEntity<List<EstudianteResponseDTO>> findByCareerAndCity(@PathVariable String career, @PathVariable String city){
         List<EstudianteResponseDTO> rows =  estudianteService.findByCareerAndCity(career, city);
         return ResponseEntity.ok().body(rows);

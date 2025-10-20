@@ -7,30 +7,33 @@ import jakarta.persistence.*;
 public class Matricula {
     @Id
     @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Para generar el ID automaticamente
-    private int id;
+    private MatriculaSerializable id;
     private int inscripcion, graduado, antiguedad;
 
+    @MapsId("dni")
     @ManyToOne (fetch=FetchType.LAZY)
     @JoinColumn(name="id_estudiante", referencedColumnName = "DNI")
     private Estudiante estudiante;
+    @MapsId("id_carrera")
     @ManyToOne (fetch=FetchType.LAZY)
     @JoinColumn(name="id_carrera")
     private Carrera carrera;
 
     public Matricula() {}
-    public Matricula(int id, int inscripcion, int graduado, int antiguedad, int id_carrera, int id_estudiante) {
+    public Matricula(MatriculaSerializable id, int inscripcion, int graduado, int antiguedad, Estudiante estudiante, Carrera carrera) {
         this.id = id;
         this.inscripcion = inscripcion;
         this.graduado = graduado;
         this.antiguedad = antiguedad;
+        this.estudiante = estudiante;
+        this.carrera = carrera;
     }
 
-    public int getId() {
+    public MatriculaSerializable getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(MatriculaSerializable id) {
         this.id = id;
     }
 
