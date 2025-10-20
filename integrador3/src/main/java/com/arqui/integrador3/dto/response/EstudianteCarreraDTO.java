@@ -1,4 +1,4 @@
-package com.arqui.integrador3.dto;
+package com.arqui.integrador3.dto.response;
 
 public class EstudianteCarreraDTO {
     private String nombre;

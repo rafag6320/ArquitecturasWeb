@@ -1,4 +1,4 @@
-package com.arqui.integrador3.dto;
+package com.arqui.integrador3.dto.response;
 
 // Entidad para mapear la solución del ejercicio 3
 public class ReporteCarreraDTO {

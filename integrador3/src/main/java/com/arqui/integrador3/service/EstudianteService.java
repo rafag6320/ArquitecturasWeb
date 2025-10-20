@@ -5,20 +5,22 @@ import com.arqui.integrador3.dto.response.EstudianteResponseDTO;
 import com.arqui.integrador3.entity.Estudiante;
 import com.arqui.integrador3.mapper.EstudianteMapper;
 import com.arqui.integrador3.repository.EstudianteRepository;
+import com.arqui.integrador3.repository.MatriculaRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EstudianteService {
     private final EstudianteRepository estudianteRepository;
     private final EstudianteMapper estudianteMapper;
+    private final MatriculaRepository matriculaRepository;
 
-    public EstudianteService(EstudianteRepository estudianteRepository,  EstudianteMapper estudianteMapper) {
+    public EstudianteService(EstudianteRepository estudianteRepository, EstudianteMapper estudianteMapper, MatriculaRepository matriculaRepository) {
         this.estudianteRepository = estudianteRepository;
         this.estudianteMapper = estudianteMapper;
+        this.matriculaRepository = matriculaRepository;
     }
 
     public EstudianteResponseDTO save(EstudianteRequestDTO req) {
@@ -40,6 +42,11 @@ public class EstudianteService {
     public List<EstudianteResponseDTO> findAll() {
         Sort sort = Sort.by(Sort.Direction.DESC, "edad");
         return estudianteRepository.findAllOrderedByAge(sort).stream().map(estudianteMapper::convertFromEntity).toList();
+    }
+
+    public List<EstudianteResponseDTO> findByCareerAndCity(String career, String city) {
+        List<Estudiante> rawList = matriculaRepository.findEstudiantesByCarreraAndCiudad(career, city);
+        return rawList.stream().map(estudianteMapper::convertFromEntity).toList();
     }
 
     public List<EstudianteResponseDTO> findByGender(String gender) {
