@@ -19,15 +19,21 @@ public class MatriculaController {
     }
 
     // Ej 2 (b) - Matricular un estudiante en una carrera
-    @PutMapping("")
+    @PostMapping("")
     public ResponseEntity<MatriculaResponseDTO> save (@RequestBody MatriculaRequestDTO req) {
         MatriculaResponseDTO matriculaResponseDTO = matriculaService.save(req);
         return ResponseEntity.ok().body(matriculaResponseDTO);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<MatriculaResponseDTO> findById(@PathVariable Integer id){
-        MatriculaResponseDTO res = matriculaService.findById(id);
+    @PutMapping("/{dni}/{id_carrera}")
+    public ResponseEntity<MatriculaResponseDTO> update (@PathVariable Integer dni, @PathVariable Integer id_carrera, @RequestBody MatriculaRequestDTO req) {
+        MatriculaResponseDTO matriculaResponseDTO = matriculaService.update(dni, id_carrera, req);
+        return ResponseEntity.ok().body(matriculaResponseDTO);
+    }
+
+    @GetMapping("/{dni}/{id_carrera}")
+    public ResponseEntity<MatriculaResponseDTO> findById(@PathVariable Integer dni, @PathVariable Integer id_carrera){
+        MatriculaResponseDTO res = matriculaService.findById(dni, id_carrera);
         return res != null ? ResponseEntity.ok().body(res) : ResponseEntity.notFound().build();
     }
 
@@ -37,9 +43,11 @@ public class MatriculaController {
         return res != null ? ResponseEntity.ok().body(res) : ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id){
-        matriculaService.delete(id);
-        return ResponseEntity.ok().build();
+    @DeleteMapping("/{dni}/{id_carrera}")
+    public ResponseEntity<Void> delete(@PathVariable Integer dni, @PathVariable Integer id_carrera){
+        if(matriculaService.delete(dni, id_carrera)){
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }

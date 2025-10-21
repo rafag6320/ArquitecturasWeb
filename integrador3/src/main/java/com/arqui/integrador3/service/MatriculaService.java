@@ -34,7 +34,7 @@ public class MatriculaService {
 
         MatriculaSerializable serializable = new MatriculaSerializable(req.getId_estudiante(),req.getId_carrera());
 
-        if(matriculaRepository.existsById(serializable.hashCode())){
+        if(matriculaRepository.existsById(serializable)){
             throw new IllegalStateException("La matricula ya existe para el estudiante " +
                     req.getId_estudiante() + " en la carrera " + req.getId_carrera());
         }
@@ -45,8 +45,26 @@ public class MatriculaService {
         return matriculaMapper.convertFromEntity(insert);
     }
 
-    public MatriculaResponseDTO findById(Integer id) {
-        Matricula m = matriculaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No se encontro matricula registrada con este ID"));
+
+    public MatriculaResponseDTO update (Integer dni, Integer id_carrera, MatriculaRequestDTO req) {
+        MatriculaSerializable serializable = new MatriculaSerializable(dni, id_carrera);
+        Matricula m = matriculaRepository.findById(serializable).orElseThrow(() -> new IllegalArgumentException("No se encontro matricula registrada con este ID"));
+        Estudiante estudiante = estudianteRepository.findById(req.getId_estudiante()).orElseThrow(() -> new IllegalArgumentException("No existe estudiante registrado con este DNI"));
+        Carrera carrera = carreraRepository.findById(req.getId_carrera()).orElseThrow(() -> new IllegalArgumentException("No existe carrera registrada con este ID"));
+
+        m.setEstudiante(estudiante);
+        m.setCarrera(carrera);
+        m.setAntiguedad(req.getAntiguedad());
+        m.setInscripcion(req.getInscripcion());
+        m.setGraduado(req.getGraduado());
+
+        matriculaRepository.save(m);
+        return matriculaMapper.convertFromEntity(m);
+    }
+
+    public MatriculaResponseDTO findById(Integer dni, Integer id_carrera) {
+        MatriculaSerializable serializable = new MatriculaSerializable(dni, id_carrera);
+        Matricula m = matriculaRepository.findById(serializable).orElseThrow(() -> new IllegalArgumentException("No se encontro matricula registrada con este ID"));
         return matriculaMapper.convertFromEntity(m);
     }
 
@@ -55,8 +73,9 @@ public class MatriculaService {
         return matriculas.stream().map(matriculaMapper::convertFromEntity).toList();
     }
 
-    public boolean delete(Integer id){
-        Matricula m = matriculaRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("No existe matricula registrada con este ID"));
+    public boolean delete(Integer dni, Integer id_carrera){
+        MatriculaSerializable serializable = new MatriculaSerializable(dni, id_carrera);
+        Matricula m = matriculaRepository.findById(serializable).orElseThrow(() -> new IllegalArgumentException("No existe matricula registrada con este ID"));
         matriculaRepository.delete(m);
         return true;
     }
